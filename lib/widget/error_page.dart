@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ErrorScreen extends StatefulWidget {
- // const ErrorScreen({Key? key}) : super(key: key);
-  String txt="";
+  // const ErrorScreen({Key? key}) : super(key: key);
+  String txt = "";
   ErrorScreen.Test(this.txt);
 
   @override
@@ -13,24 +13,30 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       debugShowCheckedModeBanner: false,
-       home: Scaffold(
-
-         appBar: AppBar(title: Text("${widget.txt}"),),
-         body: Center(
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-             children: [
-
-               new Text("${widget.txt}",style: TextStyle(fontSize: 40.0,fontWeight: FontWeight.bold),),
-               new RaisedButton(child: Text("HOME"),onPressed: (){
-                 Navigator.pushNamed(context, "/");
-               })
-
-             ],
-           ),
-         ),
-       ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text("${widget.txt}"),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                "${widget.txt}",
+                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+              ),
+              RaisedButton(
+                  color: Colors.red,
+                  child: Text("Home"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/login");
+                  })
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
