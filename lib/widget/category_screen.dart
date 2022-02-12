@@ -11,8 +11,7 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-
-  List<Category> categories =[];
+  List<Category> categories = [];
 
   @override
   void initState() {
@@ -25,53 +24,49 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text("Category"),),
-         body:  (categories != null && categories.isNotEmpty)?ListView.builder(itemCount :categories.length ,itemBuilder: (context,index){
-    return Card(
-    child: ListTile(
-    onTap: (){
-
-    },
-    leading:Text("${categories[index].catId}") ,
-    title: Text("${categories[index].catName}"),
-    ),
-    );
-    },): Center(
-    child: CircularProgressIndicator(),
-    ),
-
+        appBar: AppBar(
+          backgroundColor: Colors.amber,
+          title: Text("Category"),
+        ),
+        body: (categories != null && categories.isNotEmpty)
+            ? ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {},
+                      leading: Text("${categories[index].catId}"),
+                      title: Text("${categories[index].catName}"),
+                    ),
+                  );
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
   }
 
-  void loadData() async{
+  void loadData() async {
     try {
-
-      Map<String,String> headers ={
-        "Content-Type" : "application/json",
+      Map<String, String> headers = {
+        "Content-Type": "application/json",
       };
 
-      http.Response  response = await http.get(Uri.parse("https://grocery-second-app.herokuapp.com/api/category"));
+      http.Response response = await http.get(
+          Uri.parse("https://grocery-second-app.herokuapp.com/api/category"));
 
       var userData = response.body;
       var decodeData = jsonDecode(userData);
 
-     // print(userData);
       print(decodeData["data"]);
 
       //  users = List.from(decodeData).map<User>((item) => User.fromJson(item)).toList();
-      categories = List.from(decodeData["data"]).map<Category>((cat) => Category.fromJson(cat)).toList();
-      setState(() {
-
-      });
-      print(response.statusCode);
-
-      print("++++++++++  "+response.body);
-    }
-    catch(e)
-    {
-      print("--------------  $e");
-    }
-
+      categories = List.from(decodeData["data"])
+          .map<Category>((cat) => Category.fromJson(cat))
+          .toList();
+      setState(() {});
+    } catch (e) {}
   }
 }
