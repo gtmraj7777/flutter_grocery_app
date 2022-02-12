@@ -9,6 +9,10 @@ import 'package:flutter_grocery_app/widget/registration_form.dart';
 void main()
 {
   runApp(MyWidget());
+
+  // Comment added.
+
+
 }
 
 class MyWidget extends StatefulWidget {
